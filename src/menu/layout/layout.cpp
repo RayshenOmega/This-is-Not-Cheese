@@ -9,6 +9,8 @@
 #include "../../feats/login.hpp"
 #include "../../feats/move_speed.hpp"
 #include "../../feats/no_clip.hpp"
+#include "../../feats/rapid_attack.hpp"
+#include "../../feats/ping.hpp"
 #include "../../feats/quest.hpp"
 #include "../../feats/teleport_anywhere.hpp"
 #include "../../feats/teleport_box.hpp"
@@ -25,6 +27,16 @@ namespace Menu {
                         std::function<void()> content) {
             if (ImGui::BeginTabItem(label.c_str())) {
                 ImGui::BeginChild((label + "Child").c_str());
+            if (ImGui::BeginTabItem("Player")) {
+                Feats::MoveSpeed::menu();
+                Feats::Fov::menu();
+                Feats::JumpHeight::menu();
+                Feats::InfJump::menu();
+                Feats::NoClip::menu();
+                Feats::RapidAttack::menu();
+                Feats::UidEdit::menu();
+                ImGui::EndTabItem();
+            }
 
                 ImGui::Columns(2, (label + "Content").c_str(), false);
                 ImGui::SetColumnWidth(0, 200.0f);
