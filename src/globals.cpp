@@ -60,4 +60,41 @@ namespace Globals {
 
         return character;
     }
+
+    SDK::APlayerController *getPlayerController() {
+        const auto localPlayer = getLocalPlayer();
+        if (!localPlayer) return nullptr;
+
+        if (localPlayer->PlayerController == nullptr) {
+            return nullptr;
+        }
+
+        const auto playerController = (SDK::AQRSLPlayerController *)localPlayer->PlayerController;
+        return playerController;
+    }
+
+    SDK::UHottaInventoryComponent *getInventoryComponent() {
+        const auto character = getCharacter();
+        if (character) {
+            const auto hottaCharacter = reinterpret_cast<SDK::AHottaCharacter*>(character);
+            return hottaCharacter->InventoryComponent;
+        }
+        return nullptr;
+    }
+
+    SDK::UCheatManager *getCheatManager() {
+        const auto playerController = getPlayerController();
+        if (playerController != nullptr) {
+            return playerController->CheatManager;
+        }
+        return nullptr;
+    }
+
+    SDK::UQRSLCheatManager *getQRSLCheatManager() {
+        const auto cheatManager = getCheatManager();
+        if (cheatManager && cheatManager->IsA(SDK::UQRSLCheatManager::StaticClass())) {
+            return (SDK::UQRSLCheatManager *)cheatManager;
+        }
+        return nullptr;
+    }
 } // namespace Globals

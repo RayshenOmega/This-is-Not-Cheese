@@ -4,6 +4,10 @@ namespace Globals {
     SDK::UWorld *getWorld();
     SDK::UQRSLLocalPlayer *getLocalPlayer();
     SDK::AQRSLPlayerCharacter *getCharacter();
+    SDK::APlayerController *getPlayerController();
+    SDK::UHottaInventoryComponent *getInventoryComponent();
+    SDK::UCheatManager *getCheatManager();
+    SDK::UQRSLCheatManager *getQRSLCheatManager();
 
     template <typename T> T getObject(SDK::UClass *uClass) {
         for (int i = 0; i < SDK::UObject::GObjects->Num(); i++) {
